@@ -8,6 +8,8 @@
 .logoContainer {
   border: solid purple;
   width: 40%;
+  padding: 5px;
+  line-height: 25px;
 }
 
 .tabContainer {

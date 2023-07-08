@@ -13,9 +13,9 @@ const lowImageMens = "https://images.unsplash.com/photo-1516826957135-700dedea69
 const textDescriptionMens = "Update your everyday wardrobe with our collection of mens pants. Discover tailored suit pants for work or special occasions, as well as comfier sweatpants and joggers for downtime. Mix up your weekend look and swap the jeans for a pair of cargo pants or chinos. Browse a range of colors, from neutral blacks and grays to brighter shades and prints. Find everything from soft breathable cotton to functional track pants and luxe velvet dress pants."; 
 
 // WOMEN'S
-const headImageWomens = "";
-const productImage1 = "";
-const productImage2 = "";
+const headImageWomens = "https://previews.123rf.com/images/bridddy/bridddy1511/bridddy151100011/48080786-colorful-woman-face-with-waves-abstract-female-head-silhouette-for-logos-and-icons-elements-nature.jpg";
+const productImage1 = "https://symbolsandmeanings.net/wp-content/uploads/2021/04/Unalome-Pics-Unalome-Lotus-Tattoo-1024x1024.png";
+const productImage2 = "https://symbolsandmeanings.net/wp-content/uploads/2021/06/Yin-and-Yang-A-Chinese-Ancient-Symbol.jpg";
 const productImage3 = "";
 const productImage4 = "";
 const productImage5 = "";
@@ -43,14 +43,14 @@ let majorContainer = {
     
     womens: {
         headImage: headImageWomens,
-        optionTags: ["1", "2", "3", "4"],
+        optionTags: ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6"],
         productImages: [
-            {name: '', pic: productImage1},
-            {name: '', pic: productImage2},
-            {name: '', pic: productImage3},
-            {name: '', pic: productImage4},
-            {name: '', pic: productImage5},
-            {name: '', pic: productImage6}],
+            {name: 'Image1', pic: productImage1},
+            {name: 'Image2', pic: productImage2},
+            {name: 'Image3', pic: productImage3},
+            {name: 'Image4', pic: productImage4},
+            {name: 'Image5', pic: productImage5},
+            {name: 'Image6', pic: productImage6}],
         textDescription: textDescriptionWomens,
         lowImage: lowImageWomens
     },
@@ -58,37 +58,45 @@ let majorContainer = {
 }
 
 
+
+const switchToWomens = () => {
+    changeMainPic(headImageWomens);
+    showOptions(majorContainer.womens.optionTags);
+    showProducts(majorContainer.womens.productImages);
+}
+
 const switchToMens = () => {
-    changeTopPic()
-    showOptions()
-    showProducts()
+    changeMainPic(headImageMens);
+    showOptions(majorContainer.mens.optionTags);
+    showProducts(majorContainer.mens.productImages);
 }
 
-// replace image in main img container -- a little hack-ish
-const changeTopPic = () => {
+const changeMainPic = (newPicSrc) => {
     const mainImageDiv = document.querySelector(".mainImg");
-    let newimageTag = document.createElement("img");
-    newimageTag.setAttribute("class", "main");
-    newimageTag.setAttribute("src", headImageMens);
+    let newImageTag = document.createElement("img");
+    newImageTag.setAttribute("class", "main");
+    newImageTag.setAttribute("src", newPicSrc);
     mainImageDiv.innerHTML = "";
-    mainImageDiv.appendChild(newimageTag);
+    mainImageDiv.appendChild(newImageTag);
 }
 
-const showOptions = () => {
+const showOptions = (optionsArray) => {
     const optionsContainer = document.querySelector(".optionsContainer");
     const productContainer = document.querySelector(".productContainer");
     optionsContainer.classList.remove("hidden");
     productContainer.classList.remove("hidden");
-    majorContainer.mens.optionTags.forEach((tagname) => {
+    optionsContainer.innerHTML = "";
+    optionsArray.forEach((tagname) => {
         let optionDiv = document.createElement("div");
         optionDiv.innerHTML = tagname;
         optionsContainer.append(optionDiv);
     })
 }
 
-const showProducts = () => {
+const showProducts = (productArray) => {
     const productContainer = document.querySelector(".productContainer");
-    majorContainer.mens.productImages.forEach((obj) => {
+    productContainer.innerHTML = "";
+    productArray.forEach((obj) => {
         let imgTag  = document.createElement('img')
         imgTag.setAttribute('src', obj.pic)
         imgTag.setAttribute('class','product')
